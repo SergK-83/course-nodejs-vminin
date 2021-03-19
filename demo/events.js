@@ -14,5 +14,21 @@ const EventEmitter = require('events');
 // }, 1000);
 
 class Dispatcher extends EventEmitter {
+  subscribe(eventName, cb) {
+    console.log('[Subscribe...]');
+    this.on(eventName, cb);
+  }
 
+  dispatch(eventName, data) {
+    console.log('[Dispatch...]');
+    this.emit(eventName, data);
+  }
 }
+
+const dis = new Dispatcher();
+
+dis.subscribe('aa', data => {
+  console.log('ON: aa', data);
+});
+
+dis.dispatch('aa', {aa: 22});
